@@ -1,2 +1,2 @@
-# android-project
+# Android Project
 University project on Android
