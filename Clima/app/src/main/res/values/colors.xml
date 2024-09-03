@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Colores principales -->
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Colores de texto -->
+    <color name="textPrimary">#212121</color> <!-- Color oscuro para el texto principal -->
+    <color name="textSecondary">#757575</color> <!-- Color más claro para el texto secundario -->
+
+    <!-- Fondo -->
+    <color name="backgroundColor">#FAFAFA</color> <!-- Color suave para el fondo -->
+
+    <!-- Otros colores de uso común -->
+    <color name="divider">#BDBDBD</color> <!-- Color para los divisores en tablas o listas -->
+
 </resources>

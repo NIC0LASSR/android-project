@@ -2,6 +2,7 @@ package com.example.clima
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +15,7 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main) // Make sure to set the correct layout
+        setContentView(R.layout.activity_main)
 
         val lat = intent.getStringExtra("lat")
         val long = intent.getStringExtra("long")
@@ -46,6 +47,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setValues(response: JSONObject) {
+
+        Log.d("WeatherResponse", response.toString()) // Para ver la respuesta completa en Logcat
+
         val city = findViewById<TextView>(R.id.cityCard_text)
         city.text = response.getString("name")
 

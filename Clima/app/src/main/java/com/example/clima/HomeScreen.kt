@@ -55,12 +55,12 @@ class HomeScreen : AppCompatActivity() {
                             intent.putExtra("long", location.longitude.toString())
                             startActivity(intent)
                             finish() // Close the current activity
-                        }, 2000)
+                        }, 1000)
                     }
                 }
             } else {
                 // Prompt the user to enable GPS
-                Toast.makeText(this, "Por favor enciende tu GPS", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Por favor encienda su GPS", Toast.LENGTH_LONG).show()
             }
         } else {
             // Request the necessary permissions if not already granted
@@ -74,8 +74,8 @@ class HomeScreen : AppCompatActivity() {
         // Define the location request parameters
         val locationRequest = LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = 0
-            fastestInterval = 0
+            interval = 6000
+            fastestInterval = 30000
             numUpdates = 1 // Request location updates only once
         }
 
