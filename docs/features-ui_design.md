@@ -32,7 +32,7 @@ A continuación se presentan las principales pantallas:
 
 1. Pantalla inicio
 
-![Pantalla de inicio](imagenes/start_clima.JPG)
+![Pantalla de inicio](imagenes/home_clima.JPG)
 
 2. Permiso de ubicacion
 
@@ -40,7 +40,7 @@ A continuación se presentan las principales pantallas:
 
 3. Pantalla principal
 
-![Principal](imagenes/home_clima.JPG)
+![Principal](imagenes/start_clima.JPG)
 
 
 
