@@ -34,5 +34,5 @@ A continuación se presentan las principales pantallas:
 2. Permiso de ubicacion
 3. Pantalla principal
 
-![alt text](Clima_app-1.png)
 
+<image src="C:\Users\Nicolas\Desktop\Universidad\Android\imagenes\home_clima.JPG" alt="Descripción de la imagen">

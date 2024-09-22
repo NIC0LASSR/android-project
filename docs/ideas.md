@@ -2,7 +2,7 @@
 
 Se proponen las siguientes ideas de aplicación para el proyecto:
 
-## Idea 1: To-Do List (seleccionada)
+## Idea 1: To-Do List 
 
 Es una herramienta de gestión de tareas. Permite a los usuarios crear, organizar y priorizar sus 
 actividades diarias de manera eficiente.
@@ -24,7 +24,7 @@ Es una herramienta que permite crear, editar y organizar tus notas de manera rá
 - [Evernote](https://play.google.com/store/apps/details?id=com.evernote&hl=es_CO&gl=US)
 
 
-## Idea 3: ClimaApp
+## Idea 3: ClimaApp (seleccionada)
 
 Es una herramienta meteorológica precisa que proporciona información actualizada sobre las condiciones climáticas segun tu ubicacion actual.
 
