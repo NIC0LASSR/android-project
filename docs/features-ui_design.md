@@ -36,4 +36,4 @@ A continuación se presentan las principales pantallas:
 
 
 
-![Pantalla de inicio](/imagenes/start_clima.JPG)
+![Pantalla de inicio](/imagenes/clima_icono.png)
