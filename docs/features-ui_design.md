@@ -35,4 +35,5 @@ A continuación se presentan las principales pantallas:
 3. Pantalla principal
 
 
-<image src="C:\Users\Nicolas\Desktop\Universidad\Android\imagenes\home_clima.JPG" alt="Descripción de la imagen">
+
+![Pantalla de inicio](C:\Users\Nicolas\Desktop\Universidad\Android\imagenes\home_clima.JPG)
