@@ -36,4 +36,4 @@ A continuación se presentan las principales pantallas:
 
 
 
-![Pantalla de inicio](C:\Users\Nicolas\Desktop\Universidad\Android\imagenes\home_clima.JPG)
+![Pantalla de inicio](C:\\Users\\Nicolas\\Desktop\\Universidad\\Android\\imagenes\\home_clima.JPG)
