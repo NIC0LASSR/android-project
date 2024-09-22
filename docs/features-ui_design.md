@@ -31,9 +31,16 @@ La interfaz de usuario de la aplicación Clima esta inspirada en la interfaz de 
 A continuación se presentan las principales pantallas:
 
 1. Pantalla inicio
+
+![Pantalla de inicio](imagenes/start_clima.JPG)
+
 2. Permiso de ubicacion
+
+![Permiso ubicacion](imagenes/allow_location.JPG)
+
 3. Pantalla principal
 
+![Principal](imagenes/home_clima.JPG)
 
 
-![Pantalla de inicio](imagenes/clima_icono.png)
+
