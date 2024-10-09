@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores Primarios -->
+    <color name="primaryColor">#6200EE</color> <!-- Púrpura principal -->
+    <color name="primaryDarkColor">#3700B3</color> <!-- Tono más oscuro del color principal -->
+    <color name="accentColor">#03DAC5</color> <!-- Color de acento (cian) -->
+
+    <!-- Colores Utilitarios -->
+    <color name="white">#FFFFFF</color> <!-- Blanco puro -->
+    <color name="black">#000000</color> <!-- Negro puro -->
+    <color name="backgroundColor">#F5F5F5</color> <!-- Color de fondo claro -->
+
+    <!-- Otros Colores (Adicionales) -->
+    <color name="rojo">#F44336</color> <!-- Rojo, por ejemplo para errores -->
+    <color name="verde">#4CAF50</color> <!-- Verde, por ejemplo para éxito -->
+
+    <!-- Colores Opcionales que ya estaban -->
+    <color name="purple_200">#BB86FC</color> <!-- Puedes usarlo para tonos adicionales de púrpura -->
+    <color name="teal_700">#018786</color> <!-- Un tono más oscuro del acento cian -->
+</resources>
