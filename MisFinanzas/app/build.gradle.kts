@@ -1,6 +1,3 @@
-import android.databinding.tool.writer.ViewBinder
-import android.databinding.tool.writer.ViewBinding
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -9,13 +6,10 @@ plugins {
 android {
     namespace = "com.example.misfinanzas"
     compileSdk = 34
-    buildFeatures{
-        viewBinding = true
-    }
 
     defaultConfig {
         applicationId = "com.example.misfinanzas"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -65,15 +59,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation ("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.mpandroidchart)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -81,5 +69,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
 }

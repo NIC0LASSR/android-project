@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Opción de menú para la sección de historial -->
+    <item
+        android:id="@+id/nav_historial"
+        android:icon="@drawable/ic_historial"
+        android:title="Historial" />
+
+    <!-- Opción de menú para la sección de gráficos -->
+    <item
+        android:id="@+id/nav_graficos"
+        android:icon="@drawable/ic_graficos"
+        android:title="Gráficos" />
+
+    <!-- Opción de menú para la sección de transacciones -->
+    <item
+        android:id="@+id/nav_transacciones"
+        android:icon="@drawable/ic_transacciones"
+        android:title="Transacciones" />
+
+    <!-- Opción de saldo actual -->
+    <item
+        android:id="@+id/nav_saldo_actual"
+        android:icon="@drawable/ic_saldo"
+        android:title="Saldo Actual" />
+
+</menu>
