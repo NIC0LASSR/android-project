@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Tema basado en Theme.AppCompat con tonos de gris -->
-    <style name="Theme.MisFinanzas" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Tema basado en Theme.MaterialComponents con tonos de gris -->
+    <style name="Theme.MisFinanzas" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/gray_primary</item>
         <item name="colorPrimaryDark">@color/gray_primary_dark</item>
         <item name="colorAccent">@color/gray_accent</item>
         <item name="android:windowBackground">@color/gray_background</item>
+
+        <!-- Asegurar que los botones usen los colores correctos -->
+        <item name="materialButtonStyle">@style/Widget.MisFinanzas.Button</item>
+    </style>
+
+    <!-- Estilo personalizado para los botones -->
+    <style name="Widget.MisFinanzas.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?attr/colorAccent</item>
     </style>
 
 </resources>

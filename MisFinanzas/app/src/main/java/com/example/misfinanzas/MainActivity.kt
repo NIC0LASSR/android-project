@@ -53,15 +53,7 @@ fun IntroScreen(navController: NavHostController) {
             popUpTo("intro_screen") { inclusive = true }
         }
     }
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text(
-            text = "Welcome to Mis Finanzas!",
-            style = MaterialTheme.typography.headlineMedium
-        )
-    }
+
 }
 
 @Composable
@@ -71,7 +63,7 @@ fun SaldoScreen() {
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
-            text = "Your current balance is: $1000",
+            text = "Balance $1000",
             style = MaterialTheme.typography.headlineMedium
         )
     }

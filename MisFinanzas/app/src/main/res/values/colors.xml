@@ -11,7 +11,6 @@
     <color name="gray_primary_dark">#424242</color> <!-- Gris oscuro para el color primario oscuro -->
     <color name="gray_accent">#BDBDBD</color> <!-- Gris claro para el color de acento -->
     <color name="gray_background">#F5F5F5</color> <!-- Gris muy claro para el fondo de la ventana -->
-
-
-
+    <color name="verde">#4CAF50</color>  <!-- Green color -->
+    <color name="rojo">#F44336</color>   <!-- Red color -->
 </resources>
