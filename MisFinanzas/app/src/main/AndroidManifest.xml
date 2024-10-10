@@ -6,32 +6,45 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icono"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MisFinanzas"
         tools:targetApi="31">
 
+<<<<<<< HEAD
         <!-- Configuración de IntroActivity como la actividad de inicio -->
         <activity
             android:name=".IntroActivity"
             android:exported="true"
             android:theme="@style/Theme.MisFinanzas">
+=======
+        <!-- se lanza al iniciar la aplicación -->
+        <activity
+            android:name=".IntroActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight"> <!-- Tema que permite modo claro y oscuro -->
+>>>>>>> e917015185872ef46e772fe5f69f955708671f4b
             <intent-filter>
+                <!-- Define la actividad principal que se abre al iniciar la app -->
                 <action android:name="android.intent.action.MAIN" />
+                <!-- Hace que esta actividad aparezca en el lanzador de aplicaciones -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+<<<<<<< HEAD
         <!-- Configuración de MainActivity, ya no es la actividad principal -->
+=======
+
+>>>>>>> e917015185872ef46e772fe5f69f955708671f4b
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MisFinanzas">
         </activity>
-
     </application>
 
 </manifest>
