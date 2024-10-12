@@ -35,6 +35,10 @@ La interfaz de usuario de la aplicación **MisFinanzas** está inspirada en el u
 
    ![Transacciones](imagenes/transacciones.JPG)
 
+4. Agregar transacciones 
+
+   ![Historial](imagenes/historial.JPG)
+
 
 
 
