@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
@@ -14,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.misfinanzas.ui.theme.MisFinanzasTheme
-import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,41 +97,44 @@ fun SetupNavGraph(navController: NavHostController) {
 
 @Composable
 fun SaldoScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "Saldo Actual: $1000", style = MaterialTheme.typography.headlineMedium)
-    }
+    // Mostrar el layout de saldo usando AndroidView para inflar XML
+    AndroidView(
+        factory = { context ->
+            android.view.LayoutInflater.from(context).inflate(R.layout.activy_saldo_actual, null, false)
+        },
+        modifier = Modifier.fillMaxSize()
+    )
 }
 
 @Composable
 fun HistorialScreen(navController: NavHostController) {
-    Box(
-        contentAlignment = Alignment.Center,
+    // Mostrar el layout de historial usando AndroidView para inflar XML
+    AndroidView(
+        factory = { context ->
+            android.view.LayoutInflater.from(context).inflate(R.layout.acvity_historial, null, false)
+        },
         modifier = Modifier.fillMaxSize()
-    ) {
-        Text(text = "Historial de Transacciones", style = MaterialTheme.typography.headlineMedium)
-    }
+    )
 }
 
 @Composable
 fun GraficosScreen(navController: NavHostController) {
-    Box(
-        contentAlignment = Alignment.Center,
+    // Mostrar el layout de gráficos usando AndroidView para inflar XML
+    AndroidView(
+        factory = { context ->
+            android.view.LayoutInflater.from(context).inflate(R.layout.activity_graficos, null, false)
+        },
         modifier = Modifier.fillMaxSize()
-    ) {
-        Text(text = "Gráficos de Finanzas", style = MaterialTheme.typography.headlineMedium)
-    }
+    )
 }
 
 @Composable
 fun TransaccionesScreen(navController: NavHostController) {
-    Box(
-        contentAlignment = Alignment.Center,
+    // Mostrar el layout de transacciones usando AndroidView para inflar XML
+    AndroidView(
+        factory = { context ->
+            android.view.LayoutInflater.from(context).inflate(R.layout.activity_transaccion, null, false)
+        },
         modifier = Modifier.fillMaxSize()
-    ) {
-        Text(text = "Registrar nueva Transacción", style = MaterialTheme.typography.headlineMedium)
-    }
+    )
 }

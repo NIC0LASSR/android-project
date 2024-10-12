@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     android:isScrollContainer="false"
     android:keepScreenOn="false"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <!-- Contenedor principal que usa ConstraintLayout para gestionar la disposición de todos los elementos de la pantalla.
          Incluye atributos como layout_width y layout_height que configuran el tamaño del contenedor para ocupar todo el espacio disponible.
          También se aplicó un padding de 16dp para dar espacio a los elementos en el borde de la pantalla. -->
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardViewHeader"
@@ -21,25 +22,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Este ConstraintLayout actúa como un sub-contenedor que contiene la imagen de encabezado.
-             Las restricciones están configuradas para alinearlo horizontalmente al centro de la pantalla y situarlo en la parte superior. -->
-
         <ImageView
             android:id="@+id/imageHeader"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="187dp"
-            android:layout_marginStart="16dp"
             android:contentDescription="Encabezado de ingresos"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ingresos" />
-
-        <!-- ImageView que muestra una imagen relacionada con la pantalla, posiblemente una ilustración para representar ingresos.
-             Se utiliza scaleType 'centerCrop' para que la imagen llene el espacio asignado, recortando las partes necesarias.
-             La imagen se configura a través de srcCompat para mantener la compatibilidad con diferentes versiones de Android.
-             Además, tiene una descripción de contenido para accesibilidad. -->
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ingresos" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -52,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardViewHeader"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="50dp">
 
         <!-- TextInputLayout para el campo de fecha. Proporciona una envoltura para el campo de texto,
              mostrando un hint que indica que el usuario debe seleccionar una fecha. -->
