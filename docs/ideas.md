@@ -24,7 +24,7 @@ Es una herramienta que permite crear, editar y organizar tus notas de manera rá
 - [Evernote](https://play.google.com/store/apps/details?id=com.evernote&hl=es_CO&gl=US)
 
 
-## Idea 3: ClimaApp (seleccionada)
+## Idea 3: ClimaApp
 
 Es una herramienta meteorológica precisa que proporciona información actualizada sobre las condiciones climáticas segun tu ubicacion actual.
 
@@ -33,3 +33,14 @@ Es una herramienta meteorológica precisa que proporciona información actualiza
 - [Clima](https://play.google.com/store/apps/details?id=aplicacion.tiempo&hl=es_CO&gl=US)
 - [Tiempo](https://play.google.com/store/apps/details?id=com.wunderground.android.weather&hl=es_CO&gl=US)
 - [Clima Real](https://play.google.com/store/apps/details?id=com.wunderground.android.weather&hl=es_CO&gl=US)
+
+
+## Idea 4: MisFinanzas (seleccionada)
+
+Es una herramienta que permite llevar el control de mis ingresos, gastos y conocer mi saldo actual de dinero. Ademas me permite ver un historico de transacciones y visualizar en graficos la informacion.
+
+### Aplicaciones similares:
+
+- [Money manager & expenses](https://play.google.com/store/apps/details?id=ru.innim.my_finance)
+- [MyMoney](https://play.google.com/store/apps/details?id=com.raha.app.mymoney.free)
+- [Cashew](https://play.google.com/store/apps/details?id=com.budget.tracker_app)
