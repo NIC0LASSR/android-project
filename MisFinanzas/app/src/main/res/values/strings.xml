@@ -1,3 +1,21 @@
 <resources>
+    <!-- Nombre de la aplicación -->
     <string name="app_name">MisFinanzas</string>
+
+    <!-- Categorías para el Spinner de selección de tipo de transacción -->
+    <string-array name="categorias">
+        <item>Salario</item>
+        <item>Alquiler</item>
+        <item>Comida</item>
+        <item>Transporte</item>
+        <item>Entretenimiento</item>
+    </string-array>
+
+    <!-- Otros textos que podrías querer usar en la interfaz -->
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="seleccionar_fecha">Seleccionar Fecha</string>
+    <string name="monto">Monto (COP)</string>
+    <string name="ingreso">Ingreso</string>
+    <string name="gasto">Gasto</string>
 </resources>

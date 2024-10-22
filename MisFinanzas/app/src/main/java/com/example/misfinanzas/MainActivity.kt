@@ -12,11 +12,22 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.misfinanzas.dao.TransactionDao
+import com.example.misfinanzas.database.AppDatabase
 import com.example.misfinanzas.ui.theme.MisFinanzasTheme
 
 class MainActivity : ComponentActivity() {
+    //Variables para base de datos
+    private lateinit var database: AppDatabase
+    private lateinit var transactionDao: TransactionDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Base de datos
+        database = AppDatabase.getDatabase(this)
+        transactionDao = database.transactionDao()
+
         setContent {
             MisFinanzasTheme {
                 val navController = rememberNavController()
