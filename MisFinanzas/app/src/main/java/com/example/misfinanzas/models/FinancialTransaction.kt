@@ -1,12 +1,23 @@
 package com.example.misfinanzas.models
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+// Define la entidad 'transactions' para la base de datos Room
 @Entity(tableName = "transactions")
 data class FinancialTransaction(
+    // ID
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val date: String,       // Fecha de la transacción
-    val amount: Double,     // Monto de la transacción
-    val type: String,       // Tipo: "Ingreso" o "Gasto"
-    val category: String    // Categoría: por ejemplo, "Salario", "Alquiler"
+
+    // Fecha de la transacción, almacenada como milisegundos
+    val date: Long,
+
+    // Monto de la transacción
+    val amount: Double,
+
+    // Tipo de transacción, puede ser "Ingreso" o "Gasto"
+    val type: String,
+
+    //Categoria
+    val category: String
 )

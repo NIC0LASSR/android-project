@@ -78,7 +78,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilFecha">
 
-        <!-- TextInputLayout para el monto. Este componente actúa como contenedor para el campo de texto y muestra un hint para indicar que se ingrese un valor numérico. -->
+        <!-- TextInputLayout para el monto. Este componente actúa como contenedor para el campo de
+        texto y muestra un hint para indicar que se ingrese un valor numérico. -->
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editMonto"
