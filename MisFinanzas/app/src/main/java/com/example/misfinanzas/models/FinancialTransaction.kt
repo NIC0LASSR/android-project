@@ -2,6 +2,8 @@ package com.example.misfinanzas.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 // Define la entidad 'transactions' para la base de datos Room
 @Entity(tableName = "transactions")
@@ -18,6 +20,13 @@ data class FinancialTransaction(
     // Tipo de transacción, puede ser "Ingreso" o "Gasto"
     val type: String,
 
-    //Categoria
+    // Categoría
     val category: String
-)
+) {
+    // Función para obtener la fecha en formato legible
+    val dateFormatted: String
+        get() {
+            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            return formatter.format(date)
+        }
+}

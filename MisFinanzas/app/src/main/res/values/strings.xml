@@ -18,4 +18,13 @@
     <string name="monto">Monto (COP)</string>
     <string name="ingreso">Ingreso</string>
     <string name="gasto">Gasto</string>
+    <string name="saldo_actual_formato">Saldo Actual:\n%s</string>
+    <string name="no_transacciones">No hay transacciones</string>
+    <string name="eliminar_transaccion">Eliminar transacción</string>
+    <string name="historial">Historial</string>
+    <string name="encabezado_transaccion">Encabezado de Transacción</string>
+    <string name="completar_campos">Completar todos los campos</string>
+    <string name="seleccionar_categoria">Seleccionar categoria</string>
+
+
 </resources>

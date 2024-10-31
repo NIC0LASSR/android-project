@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:isScrollContainer="false"
-    android:keepScreenOn="false"
+    android:background="@color/gray_background"
     android:padding="20dp">
 
-    <!-- Contenedor principal que usa ConstraintLayout para gestionar la disposición de todos los elementos de la pantalla.
-         Incluye atributos como layout_width y layout_height que configuran el tamaño del contenedor para ocupar todo el espacio disponible.
-         También se aplicó un padding de 16dp para dar espacio a los elementos en el borde de la pantalla. -->
-
-
+    <!-- Contenedor del Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardViewHeader"
         android:layout_width="0dp"
@@ -26,29 +19,69 @@
             android:id="@+id/imageHeader"
             android:layout_width="wrap_content"
             android:layout_height="187dp"
-            android:contentDescription="Encabezado de ingresos"
+            android:contentDescription="Encabezado de transacción"
             android:scaleType="centerCrop"
+            android:src="@drawable/header_transacction"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ingresos" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Campo de fecha para seleccionar cuándo se realiza la transacción -->
+    <!-- Texto de Balance -->
+    <TextView
+        android:id="@+id/tvBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Saldo Actual: $0.00"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardViewHeader" />
+
+    <!-- Mensaje de Error -->
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/rojo"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBalance" />
+
+    <!-- ProgressBar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/verde"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Campo de fecha -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilFecha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Seleccionar Fecha"
+        android:layout_marginTop="16dp"
+        android:hint="@string/seleccionar_fecha"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/gray_primary"
+        app:hintTextColor="@color/gray_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewHeader"
-        android:layout_marginTop="50dp">
-
-        <!-- TextInputLayout para el campo de fecha. Proporciona una envoltura para el campo de texto,
-             mostrando un hint que indica que el usuario debe seleccionar una fecha. -->
+        app:layout_constraintTop_toBottomOf="@id/tvError">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editFecha"
@@ -58,119 +91,146 @@
             android:focusable="false"
             android:inputType="none"
             android:padding="15dp"
+            android:textColor="@color/gray_primary_dark"
             android:textSize="18sp" />
-
-        <!-- TextInputEditText para mostrar la fecha seleccionada.
-             Este campo es clickable pero no editable directamente (focusable="false"),
-             lo cual implica que el usuario debe elegir la fecha desde un selector (como un DatePicker).
-             Se usa un padding interno para hacer el texto más legible y un tamaño de fuente de 18sp. -->
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo de monto para ingresar el valor de la transacción -->
+    <!-- Campo de monto -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilMonto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Monto (COP)"
+        android:hint="@string/monto"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/gray_primary"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/gray_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilFecha">
-
-        <!-- TextInputLayout para el monto. Este componente actúa como contenedor para el campo de
-        texto y muestra un hint para indicar que se ingrese un valor numérico. -->
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editMonto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:padding="10dp"
-            android:textAlignment="textStart"
+            android:padding="15dp"
+            android:textColor="@color/gray_primary_dark"
             android:textSize="18sp" />
-
-        <!-- TextInputEditText para ingresar el monto de la transacción.
-             El inputType está configurado para aceptar solo números decimales.
-             Se usa un padding interno para mejorar la legibilidad y un tamaño de fuente de 18sp. -->
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- RadioGroup para tipo de transacción -->
     <RadioGroup
         android:id="@+id/radioGroupTipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tilMonto"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilMonto">
 
         <RadioButton
             android:id="@+id/rbIncome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ingreso" />
+            android:buttonTint="@color/verde"
+            android:text="@string/ingreso"
+            android:textColor="@color/gray_primary_dark" />
 
         <RadioButton
             android:id="@+id/rbExpense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gasto" />
+            android:buttonTint="@color/rojo"
+            android:text="@string/gasto"
+            android:textColor="@color/gray_primary_dark" />
+
     </RadioGroup>
 
-    <!-- Selección de categoría para la transacción -->
-    <!--android:entries="@array/categorias"-->
+    <!-- Spinner de categorías -->
     <Spinner
         android:id="@+id/spinnerCategoria"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:entries="@array/categorias"
-        android:padding="10dp"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupTipo"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintTop_toBottomOf="@id/radioGroupTipo" />
 
-    <!-- Layout que contiene los botones Aceptar y Cancelar -->
+    <!-- Botones -->
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerCategoria"
-        android:layout_marginTop="32dp">
+        app:layout_constraintTop_toBottomOf="@id/spinnerCategoria">
 
-        <!-- Botón para aceptar y guardar la transacción -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonAceptar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Aceptar"
+            android:text="@string/aceptar"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textColor="@color/white"
             app:backgroundTint="@color/verde"
             app:cornerRadius="8dp" />
 
-        <!-- Botón para cancelar la acción -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonCancelar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Cancelar"
+            android:text="@string/cancelar"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textColor="@color/white"
             app:backgroundTint="@color/rojo"
             app:cornerRadius="8dp" />
+
     </LinearLayout>
+
+    <!-- SwipeRefreshLayout y RecyclerView -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTransactions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="8dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- Estado vacío -->
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No hay transacciones"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/swipeRefreshLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/swipeRefreshLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

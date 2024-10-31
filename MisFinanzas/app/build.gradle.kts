@@ -21,6 +21,15 @@ android {
         }
     }
 
+    buildFeatures {
+        compose = true
+        viewBinding = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1" // Asegúrate de que esté actualizado
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -30,19 +39,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -51,52 +57,53 @@ android {
 }
 
 dependencies {
+    // Core Android dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
+    // Compose dependencies
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.mpandroidchart)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
-
-    // Room
+    // Room dependencies
     implementation("androidx.room:room-runtime:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
 
-    implementation(libs.androidx.room.ktx)
+    // Navigation dependencies
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+
+    // SwipeRefreshLayout
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // MPAndroidChart
     implementation(libs.mpandroidchart)
 
-    // Dependencias para pruebas unitarias
+    // Testing dependencies
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:4.0.0")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
-
-    // Dependencias para pruebas instrumentadas
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.room:room-testing:2.4.0")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 
-    // Dependencias para depuración
+    // Debug dependencies
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
 }

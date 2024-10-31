@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="26dp">
+        android:padding="16dp">
 
-        <!-- Subtítulo con la fecha de la transacción -->
         <TextView
             android:id="@+id/tvTransactionDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha de la Transacción"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/gray_primary"
             android:textSize="14sp" />
 
-        <!-- Título de la transacción -->
         <TextView
             android:id="@+id/tvCategoria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categoria"
-            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/gray_primary_dark"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Monto de la transacción -->
         <TextView
             android:id="@+id/tvTransactionAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="$0.00"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
-
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</com.google.android.material.card.MaterialCardView>

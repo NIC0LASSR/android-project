@@ -9,10 +9,10 @@ import com.example.misfinanzas.models.FinancialTransaction
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Assert.assertEquals // Importación correcta para JUnit
 
 @RunWith(AndroidJUnit4::class)
 class TransactionDaoTest {
@@ -51,7 +51,8 @@ class TransactionDaoTest {
         transactionDao.insertTransaction(transaction)
 
         // Obtener todas las transacciones y verificar que se ha insertado correctamente
-        val allTransactions = transactionDao.getAllTransactions().first() // Recolectar el Flow en una lista
+        val allTransactions =
+            transactionDao.getAllTransactions().first() // Recolectar el Flow en una lista
         assertEquals(1, allTransactions.size)
         assertEquals(transaction.amount, allTransactions[0].amount, 0.001)
 

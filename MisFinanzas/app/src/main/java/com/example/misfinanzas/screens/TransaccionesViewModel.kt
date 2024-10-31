@@ -4,52 +4,103 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.misfinanzas.dao.TransactionDao
 import com.example.misfinanzas.models.FinancialTransaction
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class TransaccionesViewModel(private val transactionDao: TransactionDao) : ViewModel() {
+sealed class TransactionState {
+    object Idle : TransactionState()
+    object Loading : TransactionState()
+    object Success : TransactionState()
+    data class Error(val message: String) : TransactionState()
+}
 
-    // Lista de categorías válidas (debe ser consistente con las definidas en strings.xml)
-    private val validCategories = listOf("Salario", "Alquiler", "Comida", "Transporte", "Entretenimiento")
+class TransaccionesViewModel(
+    private val transactionDao: TransactionDao
+) : ViewModel() {
 
-    // Lista de tipos válidos para las transacciones
-    private val validTypes = listOf("Ingreso", "Gasto")
+    private val _transactionState = MutableStateFlow<TransactionState>(TransactionState.Idle)
+    val transactionState: StateFlow<TransactionState> = _transactionState
+
+    private val _balance = MutableStateFlow(0.0)
+    val balance: StateFlow<Double> = _balance
+
+    private val _transactions = MutableStateFlow<List<FinancialTransaction>>(emptyList())
+    val transactions: StateFlow<List<FinancialTransaction>> = _transactions
+
+    // StateFlow para la fecha seleccionada
+    private val _selectedDate = MutableStateFlow<Long?>(null)
+    val selectedDate: StateFlow<Long?> = _selectedDate
+
+    init {
+        loadTransactions()
+        calculateBalance()
+    }
+
+    fun loadTransactions() {
+        viewModelScope.launch {
+            try {
+                transactionDao.getAllTransactions().collect { transactions ->
+                    _transactions.value = transactions
+                    calculateBalance()
+                }
+            } catch (e: Exception) {
+                _transactionState.value = TransactionState.Error("Error al cargar transacciones: ${e.message}")
+            }
+        }
+    }
+
+    private fun calculateBalance() {
+        _balance.value = _transactions.value.sumOf { it.amount }
+    }
 
     fun insertTransaction(
-        date: Long,           // Cambiar la fecha a tipo Long
-        amount: Double,
+        date: Long,
+        amount: String,
         type: String,
         category: String
     ) {
-        // Validación de entrada
-
-        if (amount <= 0 || category.isEmpty() || !validCategories.contains(category) || !validTypes.contains(type)) {
-
-            // No realizar ninguna operación si los valores no son válidos
-            return
-        }
-
-        // Ajustar el monto según el tipo
-
-        val adjustedAmount = if (type == "Ingreso") amount else -amount
-
-        // Crear la transacción
-
-        val transaction = FinancialTransaction(
-            date = date,
-            amount = adjustedAmount,
-            type = type,
-            category = category
-        )
-
-        // Insertar la transacción en la base de datos usando corrutinas
-
         viewModelScope.launch {
             try {
+                _transactionState.value = TransactionState.Loading
+
+                val amountValue = amount.toDouble()
+                val adjustedAmount = if (type == "Ingreso") amountValue else -amountValue
+
+                val transaction = FinancialTransaction(
+                    date = date,
+                    amount = adjustedAmount,
+                    type = type,
+                    category = category
+                )
+
                 transactionDao.insertTransaction(transaction)
+                _transactionState.value = TransactionState.Success
+
             } catch (e: Exception) {
-                // Manejo de errores (puede ser un log o mostrar un mensaje al usuario)
-                e.printStackTrace()
+                _transactionState.value = TransactionState.Error(
+                    e.message ?: "Error desconocido al guardar la transacción"
+                )
             }
         }
+    }
+
+    // Función para manejar la selección de fecha
+    fun onDateSelected(date: Long) {
+        _selectedDate.value = date
+    }
+
+    fun deleteTransaction(transaction: FinancialTransaction) {
+        viewModelScope.launch {
+            try {
+                transactionDao.deleteTransaction(transaction)
+            } catch (e: Exception) {
+                _transactionState.value = TransactionState.Error("Error al eliminar la transacción: ${e.message}")
+            }
+        }
+    }
+
+    fun onCancelTransaction() {
+        _transactionState.value = TransactionState.Idle
     }
 }

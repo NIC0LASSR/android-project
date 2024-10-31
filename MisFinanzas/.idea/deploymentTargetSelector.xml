@@ -5,7 +5,7 @@
       <SelectionState runConfigName="MisFinanzas">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="TransactionDaoTest">
+      <SelectionState runConfigName="TransaccionesActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
