@@ -1,7 +1,7 @@
-
 # Aplicación Android
 
-Desarrollar una aplicación de finanzas personales para dispositivos Android utilizando Kotlin como lenguaje de programación. La aplicación gestiona transacciones financieras localmente y permite al usuario llevar el control de sus ingresos, gastos y balance a través de una interfaz intuitiva.
+Desarrollar una aplicación de finanzas personales para dispositivos Android utilizando Kotlin como lenguaje de programación. 
+La aplicación gestiona transacciones financieras localmente y permite al usuario llevar el control de sus ingresos, gastos y balance a través de una interfaz intuitiva.
 
 ## Funcionalidades de la aplicación
 
