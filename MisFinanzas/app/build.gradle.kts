@@ -27,7 +27,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1" // Asegúrate de que esté actualizado
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 
     buildTypes {

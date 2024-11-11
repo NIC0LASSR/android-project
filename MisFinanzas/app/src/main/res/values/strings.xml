@@ -21,6 +21,7 @@
     <string name="no_transacciones">No hay transacciones</string>
     <string name="eliminar_transaccion">Eliminar transacción</string>
     <string name="historial">Historial</string>
+    <string name="historial_transacciones">Historial de transacciones</string>
     <string name="encabezado_transaccion">Encabezado de Transacción</string>
     <string name="completar_campos">Completar todos los campos</string>
     <string name="seleccionar_categoria">Seleccionar categoria</string>

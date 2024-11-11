@@ -37,7 +37,7 @@ fun HistorialScreen(viewModel: TransaccionesViewModel = viewModel()) {
         ) {
             // Header - Balance actual
             Text(
-                text = stringResource(R.string.saldo_actual_formato, "%.2f".format(balance)),
+                text = stringResource(R.string.historial_transacciones, "%.2f".format(balance)),
                 fontWeight = FontWeight.Bold,
                 fontSize = MaterialTheme.typography.titleLarge.fontSize,
                 modifier = Modifier
