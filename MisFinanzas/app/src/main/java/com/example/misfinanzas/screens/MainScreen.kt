@@ -3,7 +3,6 @@ package com.example.misfinanzas.screens
 import GraficosScreen
 import HistorialScreen
 import SaldoScreen
-import TransaccionesScreen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -110,8 +109,6 @@ fun SetupNavGraph(navController: NavHostController, transactionDao: TransactionD
         composable("transacciones_screen") {
             TransaccionesScreen(
                 transactionState = transaccionesViewModel.transactionState.collectAsState().value,
-                balance = transaccionesViewModel.balance.collectAsState().value,
-                transactions = transaccionesViewModel.transactions.collectAsState().value,
                 onDateSelected = { date -> transaccionesViewModel.onDateSelected(date) },
                 onSaveClicked = { date, amount, type, category ->
                     transaccionesViewModel.insertTransaction(date, amount, type, category)

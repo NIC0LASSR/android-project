@@ -1,4 +1,3 @@
-// MainActivity.kt
 package com.example.misfinanzas
 
 import android.os.Bundle

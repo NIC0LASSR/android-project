@@ -1,5 +1,8 @@
+
+package com.example.misfinanzas.screens
+
 import android.app.DatePickerDialog
-import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,23 +12,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.misfinanzas.R
 import com.example.misfinanzas.models.FinancialTransaction
-import com.example.misfinanzas.models.Transaction_State
-import com.example.misfinanzas.screens.TransactionState
+import com.example.misfinanzas.ui.TransactionItem
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
 fun TransaccionesScreen(
     transactionState: TransactionState,
-    balance: Double,
-    transactions: List<FinancialTransaction>,
     onDateSelected: (Long) -> Unit,
     onSaveClicked: (Long, String, String, String) -> Unit,
     onCancelClicked: () -> Unit
@@ -38,12 +39,30 @@ fun TransaccionesScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp)
-            .background(color = colorResource(id = R.color.gray_background))
+            .padding(16.dp)
+            .background(color = colorResource(id = R.color.gray_background)),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(text = "Saldo Actual: $balance", style = MaterialTheme.typography.titleLarge)
+        // Encabezado de la transacción
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.header_transacction),
+                contentDescription = "Header Image",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.4f))
+            )
+        }
 
-        // Implementación de la selección de fecha
+        // Selector de Fecha
         DatePickerField(
             selectedDate = selectedDate?.let { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(it) } ?: "",
             onDateSelected = { date ->
@@ -61,55 +80,137 @@ fun TransaccionesScreen(
         )
 
         // Selector de tipo de transacción
-        Row {
-            RadioButton(selected = transactionType == "Ingreso", onClick = { transactionType = "Ingreso" })
-            Text("Ingreso")
-            RadioButton(selected = transactionType == "Gasto", onClick = { transactionType = "Gasto" })
-            Text("Gasto")
+        Column {
+            Text(text = "Tipo de Transacción", style = MaterialTheme.typography.bodyMedium)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                RadioButton(
+                    selected = transactionType == "Ingreso",
+                    onClick = { transactionType = "Ingreso" }
+                )
+                Text("Ingreso")
+                RadioButton(
+                    selected = transactionType == "Gasto",
+                    onClick = { transactionType = "Gasto" }
+                )
+                Text("Gasto")
+            }
         }
 
+        // Selector de Categoría
+        CategorySelector(selectedCategory) { selectedCategory = it }
+
         // Botones para guardar y cancelar
-        Row {
-            Button(onClick = { onSaveClicked(selectedDate ?: 0L, amount, transactionType, selectedCategory) }) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(
+                onClick = {
+                    onSaveClicked(
+                        selectedDate ?: 0L,
+                        amount,
+                        transactionType,
+                        selectedCategory
+                    )
+                },
+                modifier = Modifier.weight(1f)
+            ) {
                 Text("Guardar")
             }
-            Button(onClick = onCancelClicked) {
+            OutlinedButton(
+                onClick = onCancelClicked,
+                modifier = Modifier.weight(1f)
+            ) {
                 Text("Cancelar")
             }
         }
 
-        // Listado de transacciones
-        LazyColumn {
-            items(transactions) { transaction ->
-                Text(transaction.toString())
-            }
         }
 
         // Mensaje de error o estado de carga
         if (transactionState is TransactionState.Error) {
             Text(transactionState.message, color = Color.Red)
         }
-    }
 }
+
+
 @Composable
 fun DatePickerField(selectedDate: String, onDateSelected: (Long) -> Unit) {
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
 
-    OutlinedButton(onClick = {
-        // Crear y mostrar el DatePickerDialog
-        DatePickerDialog(
-            context,
-            { _, year, month, dayOfMonth ->
-                // Establecer la fecha seleccionada
-                calendar.set(year, month, dayOfMonth)
-                onDateSelected(calendar.timeInMillis) // Llamar a onDateSelected con la fecha
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        ).show()
-    }) {
-        Text(text = if (selectedDate.isEmpty()) stringResource(R.string.seleccionar_fecha) else selectedDate)
+    OutlinedButton(
+        onClick = {
+            // Crear y mostrar el DatePickerDialog
+            DatePickerDialog(
+                context,
+                { _, year, month, dayOfMonth ->
+                    // Establecer la fecha seleccionada
+                    calendar.set(year, month, dayOfMonth)
+                    onDateSelected(calendar.timeInMillis) // Llamar a onDateSelected con la fecha
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = if (selectedDate.isEmpty())
+                stringResource(R.string.seleccionar_fecha)
+            else
+                selectedDate
+        )
+    }
+}
+
+@Composable
+fun CategorySelector(
+    selectedCategory: String,
+    onCategorySelected: (String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val categories = listOf(
+        "Alimentación",
+        "Transporte",
+        "Salud",
+        "Educación",
+        "Entretenimiento",
+        "Otros",
+        "Salario",
+        "Alquiler",
+    )
+
+    Box(modifier = Modifier.fillMaxWidth()) {
+        OutlinedButton(
+            onClick = { expanded = true },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = if (selectedCategory.isEmpty())
+                    "Seleccionar Categoría"
+                else
+                    selectedCategory
+            )
+        }
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            categories.forEach { category ->
+                DropdownMenuItem(
+                    text = { Text(category) },
+                    onClick = {
+                        onCategorySelected(category)
+                        expanded = false
+                    }
+                )
+            }
+        }
     }
 }
