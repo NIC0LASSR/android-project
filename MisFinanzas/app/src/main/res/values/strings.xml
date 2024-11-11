@@ -11,14 +11,13 @@
         <item>Entretenimiento</item>
     </string-array>
 
-    <!-- Otros textos que podrías querer usar en la interfaz -->
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="seleccionar_fecha">Seleccionar Fecha</string>
     <string name="monto">Monto (COP)</string>
     <string name="ingreso">Ingreso</string>
     <string name="gasto">Gasto</string>
-    <string name="saldo_actual_formato">Saldo Actual:\n%s</string>
+    <string name="saldo_actual_formato">Saldo Actual:\n</string>
     <string name="no_transacciones">No hay transacciones</string>
     <string name="eliminar_transaccion">Eliminar transacción</string>
     <string name="historial">Historial</string>

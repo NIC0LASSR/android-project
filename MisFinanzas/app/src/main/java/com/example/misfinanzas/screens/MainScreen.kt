@@ -45,24 +45,44 @@ fun BottomNavigationBar(navController: NavHostController) {
     BottomAppBar(
         modifier = Modifier.fillMaxWidth()
     ) {
-        NavigationItem(iconId = R.drawable.ic_saldo, description = "Saldo") {
-            navController.navigate("saldo_screen")
-        }
-        NavigationItem(iconId = R.drawable.ic_historial, description = "Historial") {
-            navController.navigate("historial_screen")
-        }
-        NavigationItem(iconId = R.drawable.ic_graficos, description = "Gráficos") {
-            navController.navigate("graficos_screen")
-        }
-        NavigationItem(iconId = R.drawable.ic_transacciones, description = "Transacciones") {
-            navController.navigate("transacciones_screen")
-        }
+        NavigationItem(
+            iconId = R.drawable.ic_saldo,
+            description = "Saldo",
+            onClick = { navController.navigate("saldo_screen") },
+            modifier = Modifier.weight(1f) // Espacio equitativo
+        )
+        NavigationItem(
+            iconId = R.drawable.ic_historial,
+            description = "Historial",
+            onClick = { navController.navigate("historial_screen") },
+            modifier = Modifier.weight(1f)
+        )
+        NavigationItem(
+            iconId = R.drawable.ic_graficos,
+            description = "Gráficos",
+            onClick = { navController.navigate("graficos_screen") },
+            modifier = Modifier.weight(1f)
+        )
+        NavigationItem(
+            iconId = R.drawable.ic_transacciones,
+            description = "Transacciones",
+            onClick = { navController.navigate("transacciones_screen") },
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 
 @Composable
-fun NavigationItem(iconId: Int, description: String, onClick: () -> Unit) {
-    IconButton(onClick = onClick) {
+fun NavigationItem(
+    iconId: Int,
+    description: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier // Aceptar un modificador
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier // Aplicar el modificador
+    ) {
         Icon(
             painter = painterResource(id = iconId),
             contentDescription = description
