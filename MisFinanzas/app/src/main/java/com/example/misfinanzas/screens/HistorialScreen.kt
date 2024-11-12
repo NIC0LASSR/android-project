@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.misfinanzas.R
 import com.example.misfinanzas.models.FinancialTransaction
-import com.example.misfinanzas.models.Transaction_State
+import com.example.misfinanzas.models.TransactionState
 import com.example.misfinanzas.screens.TransaccionesViewModel
 import com.example.misfinanzas.ui.theme.MisFinanzasTheme
 import kotlinx.coroutines.launch
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HistorialScreen(viewModel: TransaccionesViewModel = viewModel()) {
     val context = LocalContext.current
-    val transactionState by viewModel.transactionState.collectAsState(Transaction_State.Idle)
+    val transactionState by viewModel.transactionState.collectAsState(TransactionState.Idle)
     val balance by viewModel.balance.collectAsState(0.0)
     val transactions by viewModel.transactions.collectAsState(emptyList())
 
@@ -48,16 +48,16 @@ fun HistorialScreen(viewModel: TransaccionesViewModel = viewModel()) {
 
             // Estado de carga y error
             when (transactionState) {
-                is Transaction_State.Loading -> {
+                is TransactionState.Loading -> {
                     CircularProgressIndicator(
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
                             .padding(16.dp)
                     )
                 }
-                is Transaction_State.Error -> {
+                is TransactionState.Error -> {
                     Text(
-                        text = (transactionState as Transaction_State.Error).message,
+                        text = (transactionState as TransactionState.Error).message,
                         color = Color.Red,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )

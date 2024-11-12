@@ -1,7 +1,9 @@
 package com.example.misfinanzas.screens
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -13,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.misfinanzas.R
 import com.example.misfinanzas.database.AppDatabase
 import com.example.misfinanzas.databinding.ActivityTransaccionBinding
-import com.example.misfinanzas.models.Transaction_State
+import com.example.misfinanzas.models.TransactionState
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -73,11 +75,9 @@ class TransaccionesActivity : AppCompatActivity() {
                     position: Int,
                     id: Long
                 ) {
-                    // Se puede agregar lógica adicional si es necesario
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // No es necesario implementar nada aquí
                 }
             }
     }
@@ -128,20 +128,17 @@ class TransaccionesActivity : AppCompatActivity() {
     }
 
     private fun guardarTransaccion() {
-        // Validar fecha
         if (selectedDate == 0L) {
             mostrarError("Debe seleccionar una fecha")
             return
         }
 
-        // Validar monto
         val montoStr = binding.editMonto.text.toString()
         if (montoStr.isEmpty()) {
             mostrarError("Debe ingresar un monto")
             return
         }
 
-        // Validar tipo
         val tipo = when (binding.radioGroupTipo.checkedRadioButtonId) {
             R.id.rbIncome -> "Ingreso"
             R.id.rbExpense -> "Gasto"
@@ -151,19 +148,25 @@ class TransaccionesActivity : AppCompatActivity() {
             }
         }
 
-        // Validar categoría
         val categoria = binding.spinnerCategoria.selectedItem?.toString() ?: run {
             mostrarError("Debe seleccionar una categoría")
             return
         }
 
-        // Guardar transacción
+        // Convertir el monto a número y cambiar el signo si es un gasto
+        val monto = montoStr.toDouble()
+        val montoFinal = if (tipo == "Gasto") -monto else monto
+
         viewModel.insertTransaction(
             date = selectedDate,
-            amount = montoStr,
+            amount = montoFinal.toString(),
             type = tipo,
             category = categoria
         )
+
+
+        limpiarCampos()
+
     }
 
     private fun observeViewModel() {
@@ -200,13 +203,16 @@ class TransaccionesActivity : AppCompatActivity() {
 
             is TransactionState.Success -> {
                 mostrarCargando(false)
+                limpiarCampos()
                 ocultarError()
                 Toast.makeText(
                     this,
                     "Transacción guardada exitosamente",
                     Toast.LENGTH_SHORT
                 ).show()
-                limpiarCampos()
+
+
+                viewModel.onCancelTransaction()
             }
 
             is TransactionState.Error -> {
@@ -221,6 +227,7 @@ class TransaccionesActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     private fun updateBalance(balance: Double) {
         val formattedBalance = String.format("$%,.2f", balance)
         binding.tvBalance.text = getString(R.string.saldo_actual_formato, formattedBalance)

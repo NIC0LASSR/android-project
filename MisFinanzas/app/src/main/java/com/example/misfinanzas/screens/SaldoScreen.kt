@@ -10,14 +10,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.misfinanzas.R
 import com.example.misfinanzas.models.FinancialTransaction
-import com.example.misfinanzas.models.Transaction_State
+import com.example.misfinanzas.models.TransactionState
 import com.example.misfinanzas.screens.TransaccionesViewModel
 import com.example.misfinanzas.ui.theme.MisFinanzasTheme
 
 @Composable
 fun SaldoScreen(viewModel: TransaccionesViewModel) {
     val transactions by viewModel.transactions.collectAsState(initial = emptyList())
-    val transactionState by viewModel.transactionState.collectAsState(initial = Transaction_State.Idle)
+    val transactionState by viewModel.transactionState.collectAsState(initial = TransactionState.Idle)
 
     val totalBalance = calculateBalance(transactions)
     val totalIncome = calculateIncome(transactions)
@@ -89,7 +89,7 @@ fun SaldoScreen(viewModel: TransaccionesViewModel) {
             )
 
             LazyColumn {
-                if (transactionState is Transaction_State.Loading) {
+                if (transactionState is TransactionState.Loading) {
                     item {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
                     }
@@ -137,7 +137,7 @@ fun TransactionItem(transaction: FinancialTransaction) {
 
 // Helper functions to calculate totals
 private fun calculateBalance(transactions: List<FinancialTransaction>): Double {
-    return transactions.sumOf { if (it.type == "Ingreso") it.amount else -it.amount }
+    return transactions.sumOf { if (it.type == "Ingreso") it.amount else it.amount }
 }
 
 private fun calculateIncome(transactions: List<FinancialTransaction>): Double {

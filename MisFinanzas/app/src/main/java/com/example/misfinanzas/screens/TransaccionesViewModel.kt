@@ -4,23 +4,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.misfinanzas.dao.TransactionDao
 import com.example.misfinanzas.models.FinancialTransaction
+import com.example.misfinanzas.models.MonthlyData
+import com.example.misfinanzas.models.TransactionState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-sealed class TransactionState {
-    object Idle : TransactionState()
-    object Loading : TransactionState()
-    object Success : TransactionState()
-    data class Error(val message: String) : TransactionState()
-}
-
-class TransaccionesViewModel(
+@HiltViewModel
+class TransaccionesViewModel @Inject constructor(
     private val transactionDao: TransactionDao
 ) : ViewModel() {
 
+    private val _gastosMensuales = MutableStateFlow<List<MonthlyData>>(emptyList())
+    val gastosMensuales = _gastosMensuales.asStateFlow()
+
+    private val _ingresosMensuales = MutableStateFlow<List<MonthlyData>>(emptyList())
+    val ingresosMensuales = _ingresosMensuales.asStateFlow()
+
     private val _transactionState = MutableStateFlow<TransactionState>(TransactionState.Idle)
-    val transactionState: StateFlow<TransactionState> = _transactionState
+    val transactionState = _transactionState.asStateFlow()
 
     private val _balance = MutableStateFlow(0.0)
     val balance: StateFlow<Double> = _balance
@@ -28,7 +34,6 @@ class TransaccionesViewModel(
     private val _transactions = MutableStateFlow<List<FinancialTransaction>>(emptyList())
     val transactions: StateFlow<List<FinancialTransaction>> = _transactions
 
-    // StateFlow para la fecha seleccionada
     private val _selectedDate = MutableStateFlow<Long?>(null)
     val selectedDate: StateFlow<Long?> = _selectedDate
 
@@ -75,7 +80,10 @@ class TransaccionesViewModel(
                 )
 
                 transactionDao.insertTransaction(transaction)
-                _transactionState.value = TransactionState.Success
+                _transactionState.value = TransactionState.Success()
+
+                delay(200)
+                _transactionState.value = TransactionState.Idle
 
             } catch (e: Exception) {
                 _transactionState.value = TransactionState.Error(
@@ -85,7 +93,6 @@ class TransaccionesViewModel(
         }
     }
 
-    // Función para manejar la selección de fecha
     fun onDateSelected(date: Long) {
         _selectedDate.value = date
     }
@@ -94,6 +101,9 @@ class TransaccionesViewModel(
         viewModelScope.launch {
             try {
                 transactionDao.deleteTransaction(transaction)
+                _transactionState.value = TransactionState.Success()
+                delay(200)
+                _transactionState.value = TransactionState.Idle
             } catch (e: Exception) {
                 _transactionState.value = TransactionState.Error("Error al eliminar la transacción: ${e.message}")
             }

@@ -1,16 +1,14 @@
 package com.example.misfinanzas.screens
 
-import GraficosScreen
 import HistorialScreen
 import SaldoScreen
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -22,6 +20,7 @@ import androidx.navigation.compose.composable
 import com.example.misfinanzas.R
 import com.example.misfinanzas.dao.TransactionDao
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen(navController: NavHostController, transactionDao: TransactionDao) {
     Scaffold(
@@ -48,7 +47,7 @@ fun BottomNavigationBar(navController: NavHostController) {
             iconId = R.drawable.ic_saldo,
             description = "Saldo",
             onClick = { navController.navigate("saldo_screen") },
-            modifier = Modifier.weight(1f) // Espacio equitativo
+            modifier = Modifier.weight(1f)
         )
         NavigationItem(
             iconId = R.drawable.ic_historial,
@@ -76,11 +75,11 @@ fun NavigationItem(
     iconId: Int,
     description: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier // Aceptar un modificador
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         onClick = onClick,
-        modifier = modifier // Aplicar el modificador
+        modifier = modifier
     ) {
         Icon(
             painter = painterResource(id = iconId),
@@ -89,8 +88,10 @@ fun NavigationItem(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SetupNavGraph(navController: NavHostController, transactionDao: TransactionDao) {
+    // Obtener el ViewModel usando Hilt si está configurado
     val transaccionesViewModel: TransaccionesViewModel = viewModel(factory = TransaccionesViewModelFactory(transactionDao))
 
     NavHost(

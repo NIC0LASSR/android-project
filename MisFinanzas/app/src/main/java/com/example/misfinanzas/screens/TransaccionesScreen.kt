@@ -1,4 +1,3 @@
-
 package com.example.misfinanzas.screens
 
 import android.app.DatePickerDialog
@@ -20,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.misfinanzas.R
 import com.example.misfinanzas.models.FinancialTransaction
+import com.example.misfinanzas.models.TransactionState
 import com.example.misfinanzas.ui.TransactionItem
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,6 +35,18 @@ fun TransaccionesScreen(
     var amount by remember { mutableStateOf("") }
     var transactionType by remember { mutableStateOf("Ingreso") }
     var selectedCategory by remember { mutableStateOf("") }
+
+    // Efecto para limpiar los campos cuando el estado es Success
+    LaunchedEffect(transactionState) {
+        if (transactionState is TransactionState.Success) {
+            clearFields(
+                onDateClear = { selectedDate = null },
+                onAmountClear = { amount = "" },
+                onTypeClear = { transactionType = "Ingreso" },
+                onCategoryClear = { selectedCategory = "" }
+            )
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -121,21 +133,39 @@ fun TransaccionesScreen(
                 Text("Guardar")
             }
             OutlinedButton(
-                onClick = onCancelClicked,
+                onClick = {
+                    clearFields(
+                        onDateClear = { selectedDate = null },
+                        onAmountClear = { amount = "" },
+                        onTypeClear = { transactionType = "Ingreso" },
+                        onCategoryClear = { selectedCategory = "" }
+                    )
+                    onCancelClicked()
+                },
                 modifier = Modifier.weight(1f)
             ) {
                 Text("Cancelar")
             }
         }
 
-        }
-
         // Mensaje de error o estado de carga
         if (transactionState is TransactionState.Error) {
             Text(transactionState.message, color = Color.Red)
         }
+    }
 }
 
+private fun clearFields(
+    onDateClear: () -> Unit,
+    onAmountClear: () -> Unit,
+    onTypeClear: () -> Unit,
+    onCategoryClear: () -> Unit
+) {
+    onDateClear()
+    onAmountClear()
+    onTypeClear()
+    onCategoryClear()
+}
 
 @Composable
 fun DatePickerField(selectedDate: String, onDateSelected: (Long) -> Unit) {
@@ -144,13 +174,11 @@ fun DatePickerField(selectedDate: String, onDateSelected: (Long) -> Unit) {
 
     OutlinedButton(
         onClick = {
-            // Crear y mostrar el DatePickerDialog
             DatePickerDialog(
                 context,
                 { _, year, month, dayOfMonth ->
-                    // Establecer la fecha seleccionada
                     calendar.set(year, month, dayOfMonth)
-                    onDateSelected(calendar.timeInMillis) // Llamar a onDateSelected con la fecha
+                    onDateSelected(calendar.timeInMillis)
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),

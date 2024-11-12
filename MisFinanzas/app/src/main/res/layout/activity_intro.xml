@@ -39,7 +39,7 @@
             android:layout_marginBottom="32dp"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Finanzas"
+            android:text="MisFinanzas"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
             android:textStyle="bold" />
